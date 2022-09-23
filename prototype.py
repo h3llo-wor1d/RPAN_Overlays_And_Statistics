@@ -8,9 +8,6 @@ redditData = {}
 
 def get_v2_cookie():
     isNotCookie = True
-    global full_token
-    global config
-    global cookie
 
     while isNotCookie:
         username = config['username']
@@ -38,9 +35,6 @@ def get_v2_cookie():
         else:
             print(f'Got errors: {login_response["json"]["errors"]}. retrying in 2s...')
             time.sleep(2)
-
-
-
 
 def fetchFollowerList():
     # Literally why the fuck is this private, reddit.
