@@ -1,10 +1,10 @@
 ## Authentication Code based on https://github.com/Spikeedoo/SnooKey/blob/master/snookey.py
 
-import requests, json
-import time
+import requests, json, time, bs4, flask, flask_cors, threading
 
 config = json.load(open("options.json"))
 reddit = requests.session()
+redditData = {}
 
 def get_v2_cookie():
     isNotCookie = True
@@ -39,7 +39,36 @@ def get_v2_cookie():
             print(f'Got errors: {login_response["json"]["errors"]}. retrying in 2s...')
             time.sleep(2)
 
-def getFollowers():
+
+
+
+def fetchFollowerList():
+    # Literally why the fuck is this private, reddit.
+    # Whatever, I made it public lmao
+    global redditData
+    cookie = get_v2_cookie()
+    headers = {
+            'Cookie': 'reddit_session=' + cookie,
+            'authorization': 'Basic b2hYcG9xclpZdWIxa2c6',
+            'user-agent': 'Project SnooKey/0.2',
+            'content-type': 'application/json; charset=UTF-8',
+    }
+    r = reddit.request("GET", f"https://www.reddit.com/user/{config['username']}/followers", headers=headers) # Get all of the followers!!!
+    print(r)
+    hin = r.text
+    soup = bs4.BeautifulSoup(hin)
+    mydivs = soup.find_all("div", {"class": "_2mHuuvyV9doV3zwbZPtIPG"})
+    followers = []
+    for item in mydivs:
+        try:
+            followers.append(str(item).split("</div></div></div></span>")[1][:-6])
+        except:
+            pass
+    print(followers)
+    print(len(followers))
+
+def fetchReddit():
+    global redditData
     cookie = get_v2_cookie()
     headers = {
             'Cookie': 'reddit_session=' + cookie,
@@ -49,7 +78,16 @@ def getFollowers():
     }
     while True:
         r = reddit.request("GET", url=f"https://www.reddit.com/user/h3llo_wor1d/about.json", headers=headers)
-        json.dump(r.json(), open("reddit_out.json", "w+"), indent=4)
+        redditData = json.dumps(r.json(), indent=4)
         time.sleep(1)
 
-getFollowers()
+threading.Thread(target=fetchReddit).start()
+
+app = flask.Flask(__name__)
+flask_cors.CORS(app)
+
+@app.route("/")
+def hello_world():
+    return redditData
+
+app.run(host="0.0.0.0", port=8080)

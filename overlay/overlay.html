@@ -1,0 +1,75 @@
+<style>
+    @font-face {
+        font-family: main;
+        src: url("roobert.ttf");
+    }
+
+    body {
+        margin: 0;
+        font-size: 22px;
+        font-family: main;
+    }
+
+    progress {
+        border: none;
+        height: 75px;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin-top: 40px;
+    }
+
+    .goalLeft {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+    .goalRight {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+
+    #feed {
+        position: relative;
+        height: 150px;
+    }
+
+    .goalMessage {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 32px;
+    }
+</style>
+
+
+<script>
+    const followerGoal = 100;
+    const followerGoalMessage = "Follower Goal This Month!";
+    var followerCount = 0;
+    var goal = 0;
+    function intervalFetch() {
+        fetch("http://localhost:8080")
+        .then(data=> data.json())
+        .then(data => {
+            followerCount = data.data.subreddit.subscribers;
+            goal = followerCount/followerGoal;
+            document.getElementById("feed").innerHTML = `
+<div class="goalMessage">${followerGoalMessage}</div>
+<progress value="${followerCount}" max=${followerGoal}></progress>
+<div class="goalLeft">${followerCount}</div>
+<div class="goalRight">${followerGoal}</div>
+
+`;
+            
+        })
+    }
+    intervalFetch();
+    setInterval(intervalFetch, 500);
+</script>
+
+<div id="feed" />
