@@ -1,4 +1,4 @@
-![alt text]("https://raw.githubusercontent.com/willow-rubenstein/RPAN_Overlays_And_Statistics/master/in_action.png")
+![alt text](https://raw.githubusercontent.com/willow-rubenstein/RPAN_Overlays_And_Statistics/master/in_action.png)
 
 # RPAN Overlays and Statistics
 
