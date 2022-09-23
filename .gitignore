@@ -1,1 +1,4 @@
 options.json
+bundle/**
+options.js
+reddit_out.json
