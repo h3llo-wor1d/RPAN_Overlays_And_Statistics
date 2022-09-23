@@ -77,7 +77,7 @@ def fetchReddit():
             'content-type': 'application/json; charset=UTF-8',
     }
     while True:
-        r = reddit.request("GET", url=f"https://www.reddit.com/user/h3llo_wor1d/about.json", headers=headers)
+        r = reddit.request("GET", url=f"https://www.reddit.com/user/{config['username']}/about.json", headers=headers)
         redditData = json.dumps(r.json(), indent=4)
         time.sleep(1)
 
