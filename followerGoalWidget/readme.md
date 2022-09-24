@@ -4,7 +4,6 @@
 - In order to use this, first, you need to edit options.temp.json to have your reddit username + pass in it.
 > Follower data is not public for... whatever reason? so we need to spoof a logged in session!
 - This data is not stored anywhere else! Take care in not accidentally showing this on-stream, please.
-
 > Once you have finished changing the `username` and `password` parts of the file to your username and password, save it, 
 > and rename it to options.json
 
@@ -15,6 +14,7 @@
 
 ## Part 3: Widget Customization
 > This part requires minimal scripting knowledge!
+
 In `overlay/` there is a file named `options.js`. This file contains all of the customization options for the widget.
 Here is a list of what to edit/how to edit/if it should be edited:
 
@@ -27,15 +27,19 @@ Optionally, this to the name of the color you would like to have the goal progre
 
 ### followerGoal
 > You should absolutely edit this!
-Change this to the number of followers you'd like for the goal, there is no limit!
+
+- Change this to the number of followers you'd like for the goal, there is no limit!
 
 ### followerGoalMessage
 > You should absolutely edit this!
-Change this to the message you want on top of the widget!
+
+- Change this to the message you want on top of the widget!
+
 > Do note, if it's too long, it will cut off
 
 ### backendPath
 > You should absolutely NOT under basically ANY circumstances edit this
+
 Only change this if you're also a software dev, and localhost:8000 is being used for another process for some reason.
 Additionally, you need to change the port in `backend_PROTOTYPE.py`, obviously, as well, to match the port/stuff you use for this.
 This is not recommended to be edited at all.
@@ -43,6 +47,7 @@ This is not recommended to be edited at all.
 
 ## Part 4: Adding into RPAN Studio/Activating
 > This is the easiest part, assuming you got this far.
+
 To add this to RPAN Studio, simply just drag overlay.html into it!
 
 ### In order to activate it, you NEED to start backend_PROTOTYPE.py
