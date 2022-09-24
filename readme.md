@@ -21,3 +21,6 @@ All other future readmes will be in the project folders for each of the followin
 
 - Will there be a roadmap for future additions to this project?
 > Absolutely!!! I plan on adding so much more than just a stupid follower goal widget lol.
+
+- How do I download this?
+> Just press the `Code` dropdown, and click `Download Zip`, or if you're a seasoned git user, just `git clone` :)
