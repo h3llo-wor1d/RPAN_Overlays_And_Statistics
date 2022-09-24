@@ -1,4 +1,6 @@
 ## Authentication Code based on https://github.com/Spikeedoo/SnooKey/blob/master/snookey.py
+## This is just a PROTOTYPE!!! 
+## I plan on recreating this in a different, more optimized language (probably c-sharp using WS) in the near future!!!
 
 import requests, json, time, bs4, flask, flask_cors, threading
 
