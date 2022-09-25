@@ -1,5 +1,5 @@
-import praw, os, requests
-import requests, json, time, bs4, flask, flask_cors, threading, re
+import os, requests
+import requests, json, time, threading, re
 
 config = json.load(open("options.json"))
 reddit = requests.session()
